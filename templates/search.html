@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/legend.css') }}">
+    <script src='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js'></script>
+    <!--<script src="{{ url_for('static', filename='js/vendor/chartist-plugin-accessibility.min.js') }}"></script>-->
+    <script src="{{ url_for('static', filename='js/vendor/chartist-plugin-axistitle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vendor/chartist-plugin-legend.js') }}"></script>
+    <style>
+        .card:hover {
+            border-color: #1DB594;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+            <h1> Muse Navi </h1>
+            <form>
+                <div class='form-row'>
+                    <div class='form-group col-md-3'>
+                        <label for='inputArtist'>Artist</label>
+                        <input class='form-control' id='inputArtist' name='artist' type='text'>
+                    </div>  
+                    <div class='form-group col-md-3'>
+                        <label for='inputAlbum'>Album</label>
+                        <input class='form-control' id='inputAlbum' name='album' type='text'>
+                    </div>
+                    <div class='form-group col-md-3'>
+                        <label for='inputTrack'>Track</label>
+                        <input class='form-control' id='inputTrack' name='track' type='text'>
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='form-group col-md-3'>
+                        <label for='inputGenre'>Genre</label>
+                        <input class='form-control' id='inputGenre' name='genre' type='text'>
+                    </div>  
+                    <div class='form-group col-md-3'>
+                        <label for='inputYear'>Year(s)</label>
+                        <input class='form-control' id='inputYear' name='year' type='text' placeholder='2010-2020'>
+                    </div>
+                    <div class='form-group col-md-3'>
+                        <label for='inputPlaylist'>Playlist</label>
+                        <input class='form-control' id='inputPlaylist' name='playlist' type='text'>
+                    </div>
+                </div>
+                <fieldset class='form-group'>
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">Result Type</legend>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="retRadios" id="albumRadio" value="Album" checked>
+                                <label class="form-check-label" for="albumRadio">
+                                    Album
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="retRadios" id="trackRadio" value="Track">
+                                <label class="form-check-label" for="trackRadio">
+                                    Track
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="retRadios" id="playlistRadio" value="Playlist">
+                                <label class="form-check-label" for="playlistRadio">
+                                    Playlist
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>                 
+            <input class='btn btn-primary' type='submit' value='Search'>
+            </form>
+ 
+            <div id='slide' class='d-flex flex-row flex-wrap mt-3'></div>
+
+            <!-- Modals -->
+            <div class='modal fade' id='tfModal' tabindex='-1' role='dialog', aria-labelledby='track features'>
+                <div class='modal-dialog modal-xl' role='document'>
+                    <div class='modal-content'>
+                        <div class='container-fluid'>
+                            <div class='row'>
+                                <div class='d-flex col-md-6' id='tfmImg'>
+                                    <div class='p-4 align-self-center'>
+                                        <img src='' class='mw-100' id='tfmImg'>
+                                    </div>
+                                </div>    
+                                <div class='col-md-6'>  
+                                    <div class='px-4 pt-4 pb-2' id='tfmText'></div>
+                                    <ul class ='nav nav-pills px-4' id='modalPillTab' role='tablist'>
+                                        <li class='nav-item'>
+                                            <a class='nav-link active' id='modalPillKeyTab' data-toggle='pill' href='#modalPillKeyContent' role='tab' aria-controls='pills-key' aria-selected='true'>Key Signature</a>
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a class='nav-link' id='modalPillFeatureTab' data-toggle='pill' href='#modalPillFeatureContent' role='tab' aria-controls='pills-feature' aria-selected='false'>Features</a>
+                                        </li>
+                                    </ul>
+                                    <div class='tab-content' id='modalPillTabContent'>
+                                        <div class='tab-pane fade show active' id='modalPillKeyContent' role='tabpanel' aria-labelledby='modal-pill-key-content'>
+                                            <div id='tfmKeyGraph'></div>
+                                        </div>
+
+                                        <div class='tab-pane fade' id='modalPillFeatureContent' role='tabpanel' aria-labelledby='modal-pill-feature-content'>
+                                            <div id='tfmFeatureLegend'></div>
+                                            <div id='tfmFeatureGraph'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-body p-0'></div>
+                        <div class='modal-footer' style='float: right'>
+                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="{{ url_for('static', filename='js/handler.js') }}"></script>
+{% endblock %}
+
+

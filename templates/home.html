@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        .vertical-center {
+            height: 100%;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-color {
+            background-color: #1DB954;
+            border-color: #1DB954;
+        }
+        .btn-color:hover {
+            background-color: green;
+            border-color: green;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+    <div class="vertical-center">
+        <h1 class="display-2"> Muse Navi </h1>
+        <p> Search for albums, tracks, and playlists on Spotify and learn more about the songs you love by examining their features! </p>
+        <p class="lead">
+            <a class="btn btn-primary btn-color btn-lg" href="{{ url_for('search') }}" role='button'> Get Started! </a>
+        </p>
+    </div>
+{% endblock %}
